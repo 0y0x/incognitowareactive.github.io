@@ -5,14 +5,65 @@
   <title>Test</title>
   <style>
     body {
-      /* Set full height */
       height: 200vh;
       margin: 0;
       background: linear-gradient(to bottom, tan, white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #tridentButton {
+      width: 160px;
+      height: 60px;
+      font-size: 18px;
+      border: 2px solid #666;
+      background-color: white;
+      color: black;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    /* Tan background */
+    .tan {
+      background-color: tan;
+      color: white;
+    }
+
+    /* Trident state */
+    .trident::after {
+      content: "🔱"; /* Unicode trident symbol */
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: white;
     }
   </style>
 </head>
 <body>
-  
+
+<button id="tridentButton">Click Me</button>
+
+<script>
+  const button = document.getElementById('tridentButton');
+  let state = 0;
+
+  button.addEventListener('click', () => {
+    state = (state + 1) % 3; // Cycles through 0, 1, 2
+
+    // Reset all classes
+    button.classList.remove('tan', 'trident');
+
+    if (state === 1) {
+      button.classList.add('tan', 'trident');
+    } else {
+      // Only white, no extra class needed (default)
+    }
+  });
+</script>
+
 </body>
 </html>
